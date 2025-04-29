@@ -12,6 +12,14 @@
             font-family: 'Inter', sans-serif;
             background-color: #f0f2f5;
             color: #1c1e21;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        html.dark {
+            background-color: #121212 !important;
+            color: #e0e0e0;
+        }
+        html.dark body {
+            background-color: #121212 !important;
         }
         @keyframes fadeIn {
             from {
@@ -64,23 +72,41 @@
         header {
             background-color: #fff;
             box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        html.dark header {
+            background-color: #1e1e1e;
         }
 
         header h1 {
             color: #1877f2;
         }
 
+        html.dark header h1 {
+            color: #a3c9ff;
+        }
+
         nav ul li a {
             color: #1c1e21;
             font-weight: 600;
             padding-bottom: 0.25rem;
-            transition: border-color 0.3s ease;
+            transition: border-color 0.3s ease, color 0.3s ease;
             border-bottom: 3px solid transparent;
+        }
+
+        html.dark nav ul li a {
+            color: #d0d0d0;
         }
 
         nav ul li a:hover {
             border-bottom: 3px solid #1877f2;
             color: #1877f2;
+        }
+
+        html.dark nav ul li a:hover {
+            color: #a3c9ff;
+            border-bottom-color: #a3c9ff;
         }
 
         .container {
@@ -92,11 +118,20 @@
             border-radius: 8px;
             box-shadow: 0 1px 2px rgb(0 0 0 / 0.1);
             padding: 1.5rem;
-            transition: box-shadow 0.3s ease;
+            transition: box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        html.dark section#services > div > div {
+            background-color: #3a3b3c;
+            box-shadow: 0 1px 2px rgb(0 0 0 / 0.5);
         }
 
         section#services > div > div:hover {
             box-shadow: 0 4px 8px rgb(0 0 0 / 0.15);
+        }
+
+        html.dark section#services > div > div:hover {
+            box-shadow: 0 6px 12px rgb(0 0 0 / 0.7);
         }
 
         h2.section-heading {
@@ -106,24 +141,63 @@
             padding-bottom: 0.5rem;
             margin-bottom: 1.5rem;
             display: inline-block;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        html.dark h2.section-heading {
+            color: #e4e6eb;
+            border-color: #66a0ff;
         }
 
         a.glow-button {
             background-color: #1877f2;
             box-shadow: none;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         a.glow-button:hover {
             box-shadow: 0 0 15px 5px rgba(24, 119, 242, 0.7);
             background-color: #165ec9;
         }
+
+        html.dark a.glow-button {
+            background-color: #3a3b3c;
+        }
+
+        html.dark a.glow-button:hover {
+            background-color: #2a2b2c;
+            box-shadow: 0 0 15px 5px rgba(102, 160, 255, 0.7);
+        }
+
+        /* Dark mode toggle button */
+        #dark-mode-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #1877f2;
+            font-size: 1.25rem;
+            padding: 0.25rem 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        #dark-mode-toggle:hover {
+            color: #165ec9;
+        }
+
+        html.dark #dark-mode-toggle {
+            color: #66a0ff;
+        }
+
+        html.dark #dark-mode-toggle:hover {
+            color: #99bfff;
+        }
     </style>
 </head>
-<body id="app" class="bg-white text-gray-900" style="scroll-behavior: smooth;">
+<body id="app" style="scroll-behavior: smooth;">
     <header>
         <div class="container mx-auto px-6 py-6 flex justify-between items-center">
             <h1 class="text-3xl font-extrabold tracking-tight">Fornubi</h1>
-            <nav>
+            <nav class="flex items-center space-x-4">
                 <div class="md:hidden">
                     <button @click="menuOpen = !menuOpen" aria-label="Toggle menu" class="focus:outline-none">
                         <svg class="w-8 h-8 text-gray-900" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
@@ -133,7 +207,24 @@
                         </svg>
                     </button>
                 </div>
-                <ul id="mobile-menu" :class="{'open': menuOpen}" class="md:flex md:space-x-6 md:flex-row flex flex-col items-end space-y-4 text-lg font-medium pr-4 bg-white md:bg-transparent">
+                <button id="dark-mode-toggle" @click="toggleDarkMode" :aria-label="darkMode ? 'Switch to light mode' : 'Switch to dark mode'">
+                    <template v-if="darkMode">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m8.66-9h-1M4.34 12h-1m15.07 4.24l-.7-.7M6.34 6.34l-.7-.7m12.02 12.02l-.7-.7M6.34 17.66l-.7-.7M12 5a7 7 0 000 14 7 7 0 000-14z" />
+                        </svg>
+                    </template>
+                    <template v-else>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" stroke="none">
+                            <path d="M21.64 13.64a9 9 0 11-11.28-11.28 7 7 0 0011.28 11.28z" />
+                        </svg>
+                    </template>
+                </button>
+                <ul id="mobile-menu" v-show="menuOpen" class="block md:hidden flex flex-col items-end space-y-4 text-lg font-medium pr-4 bg-white">
+                    <li><a href="#services" class="hover:text-blue-700 transition-colors duration-300 block py-2">Services</a></li>
+                    <li><a href="#about" class="hover:text-blue-700 transition-colors duration-300 block py-2">About</a></li>
+                    <li><a href="#contact" class="hover:text-blue-700 transition-colors duration-300 block py-2">Contact</a></li>
+                </ul>
+                <ul class="hidden md:flex md:space-x-6 md:flex-row text-lg font-medium pr-4 bg-transparent">
                     <li><a href="#services" class="hover:text-blue-700 transition-colors duration-300 block py-2">Services</a></li>
                     <li><a href="#about" class="hover:text-blue-700 transition-colors duration-300 block py-2">About</a></li>
                     <li><a href="#contact" class="hover:text-blue-700 transition-colors duration-300 block py-2">Contact</a></li>
@@ -217,8 +308,31 @@
         createApp({
             data() {
                 return {
-                    menuOpen: false
+                    menuOpen: false,
+                    darkMode: false
                 }
+            },
+            mounted() {
+                // Load dark mode preference from localStorage
+                const savedMode = localStorage.getItem('darkMode');
+                if (savedMode) {
+                    this.darkMode = savedMode === 'true';
+                    this.updateBodyClass();
+                }
+            },
+            methods: {
+                toggleDarkMode() {
+                    this.darkMode = !this.darkMode;
+                    localStorage.setItem('darkMode', this.darkMode);
+                    this.updateBodyClass();
+                },
+            updateBodyClass() {
+                if (this.darkMode) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            }
             }
         }).mount('#app');
     </script>
