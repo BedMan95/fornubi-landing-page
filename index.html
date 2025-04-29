@@ -6,9 +6,12 @@
     <title>Fornubi PC Service & Web Development</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #1c1e21;
         }
         @keyframes fadeIn {
             from {
@@ -56,37 +59,95 @@
                 overflow: visible;
             }
         }
+
+        /* Facebook inspired styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+        }
+
+        header h1 {
+            color: #1877f2;
+        }
+
+        nav ul li a {
+            color: #1c1e21;
+            font-weight: 600;
+            padding-bottom: 0.25rem;
+            transition: border-color 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav ul li a:hover {
+            border-bottom: 3px solid #1877f2;
+            color: #1877f2;
+        }
+
+        .container {
+            max-width: 960px;
+        }
+
+        section#services > div > div {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem;
+            transition: box-shadow 0.3s ease;
+        }
+
+        section#services > div > div:hover {
+            box-shadow: 0 4px 8px rgb(0 0 0 / 0.15);
+        }
+
+        h2.section-heading {
+            color: #1c1e21;
+            font-weight: 700;
+            border-bottom: 3px solid #1877f2;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        a.glow-button {
+            background-color: #1877f2;
+            box-shadow: none;
+        }
+
+        a.glow-button:hover {
+            box-shadow: 0 0 15px 5px rgba(24, 119, 242, 0.7);
+            background-color: #165ec9;
+        }
     </style>
 </head>
-<body class="bg-white text-gray-900" style="scroll-behavior: smooth;">
-    <header class="bg-gray-900 text-white fade-in shadow-md">
+<body id="app" class="bg-white text-gray-900" style="scroll-behavior: smooth;">
+    <header>
         <div class="container mx-auto px-6 py-6 flex justify-between items-center">
             <h1 class="text-3xl font-extrabold tracking-tight">Fornubi</h1>
             <nav>
                 <div class="md:hidden">
-                    <button id="mobile-menu-button" aria-label="Toggle menu" class="focus:outline-none">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <button @click="menuOpen = !menuOpen" aria-label="Toggle menu" class="focus:outline-none">
+                        <svg class="w-8 h-8 text-gray-900" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                             <line x1="3" y1="6" x2="21" y2="6"></line>
                             <line x1="3" y1="12" x2="21" y2="12"></line>
                             <line x1="3" y1="18" x2="21" y2="18"></line>
                         </svg>
                     </button>
                 </div>
-<ul id="mobile-menu" class="md:flex md:space-x-6 md:flex-row flex flex-col items-end space-y-4 text-lg font-medium pr-4 bg-gray-900 md:bg-transparent">
-    <li><a href="#services" class="hover:text-blue-400 transition-colors duration-300 block py-2">Services</a></li>
-    <li><a href="#about" class="hover:text-blue-400 transition-colors duration-300 block py-2">About</a></li>
-    <li><a href="#contact" class="hover:text-blue-400 transition-colors duration-300 block py-2">Contact</a></li>
-</ul>
+                <ul id="mobile-menu" :class="{'open': menuOpen}" class="md:flex md:space-x-6 md:flex-row flex flex-col items-end space-y-4 text-lg font-medium pr-4 bg-white md:bg-transparent">
+                    <li><a href="#services" class="hover:text-blue-700 transition-colors duration-300 block py-2">Services</a></li>
+                    <li><a href="#about" class="hover:text-blue-700 transition-colors duration-300 block py-2">About</a></li>
+                    <li><a href="#contact" class="hover:text-blue-700 transition-colors duration-300 block py-2">Contact</a></li>
+                </ul>
             </nav>
         </div>
     </header>
 
-    <section class="bg-white py-20 fade-in">
-        <div class="container mx-auto px-6 text-center max-w-4xl">
-            <h2 class="text-5xl font-extrabold mb-6 leading-tight">Your Trusted PC Service & Web Development Partner</h2>
-            <p class="text-xl text-gray-600 mb-12">We provide professional PC repair and custom website development services to meet your needs.</p>
+    <section class="bg-white py-20 fade-in relative overflow-hidden">
+        <div class="container mx-auto px-6 text-center max-w-4xl relative z-10">
+            <h2 class="text-5xl font-extrabold mb-6 leading-tight section-heading">Your Trusted PC Service & Web Development Partner</h2>
+            <p class="text-xl text-gray-700 mb-12">We provide professional PC repair and custom website development services to meet your needs.</p>
             <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80" alt="PC Service and Web Development" class="mx-auto mb-12 rounded-lg shadow-lg bounce" />
-            <a href="#contact" class="inline-block bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-800 transition-colors duration-300">Get Started</a>
+            <a href="#contact" class="inline-block bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold glow-button hover:bg-blue-800 transition-colors duration-300">Get Started</a>
         </div>
     </section>
 
@@ -150,15 +211,16 @@
                 }
             });
         });
-
-        // Mobile menu toggle
-        const menuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        menuButton.addEventListener('click', () => {
-            // mobileMenu.classList.toggle('hidden');
-            mobileMenu.classList.toggle('open');
-        });
+    </script>
+    <script>
+        const { createApp } = Vue;
+        createApp({
+            data() {
+                return {
+                    menuOpen: false
+                }
+            }
+        }).mount('#app');
     </script>
 </body>
 </html>
