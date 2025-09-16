@@ -8,6 +8,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
     <style>
+        /* Ensure mobile menu text is visible in light mode */
+        #mobile-menu {
+            color: #1c1e21 !important;
+        }
+        html.dark #mobile-menu {
+            color: #e0e0e0 !important;
+        }
         p {
             color: #222 !important;
         }
