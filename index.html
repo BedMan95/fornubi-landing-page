@@ -186,13 +186,15 @@
             <h1 class="text-3xl font-extrabold tracking-tight brand-gradient">Fornubi</h1>
             <nav class="flex items-center space-x-4">
                 <div class="md:hidden">
-                    <button @click="menuOpen = !menuOpen" aria-label="Toggle menu" class="focus:outline-none mr-2">
-                        <svg class="w-8 h-8" :class="darkMode ? 'text-gray-100' : 'text-gray-900'" fill="none" :stroke="darkMode ? '#f3f4f6' : '#1c1e21'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                            <line x1="3" y1="6" x2="21" y2="6"></line>
-                            <line x1="3" y1="12" x2="21" y2="12"></line>
-                            <line x1="3" y1="18" x2="21" y2="18"></line>
-                        </svg>
-                    </button>
+                        <div :class="['w-full', menuOpen ? 'flex justify-center' : 'flex justify-end']">
+                            <button @click="menuOpen = !menuOpen" aria-label="Toggle menu" class="focus:outline-none transition-all duration-300">
+                                <svg class="w-8 h-8" :class="darkMode ? 'text-gray-100' : 'text-gray-900'" fill="none" :stroke="darkMode ? '#f3f4f6' : '#1c1e21'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
                 </div>
                 <button id="dark-mode-toggle" @click="toggleDarkMode" :aria-label="darkMode ? 'Switch to light mode' : 'Switch to dark mode'">
                     <template v-if="darkMode">
