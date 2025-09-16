@@ -182,11 +182,11 @@
 </head>
 <body id="app" style="scroll-behavior: smooth;">
     <header class="sticky top-0 z-30 fade-in">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="container mx-auto px-3 md:px-6 py-4 flex justify-between items-center">
             <h1 class="text-3xl font-extrabold tracking-tight brand-gradient">Fornubi</h1>
             <nav class="flex items-center space-x-4">
                 <div class="md:hidden">
-                    <button @click="menuOpen = !menuOpen" aria-label="Toggle menu" class="focus:outline-none">
+                    <button @click="menuOpen = !menuOpen" aria-label="Toggle menu" class="focus:outline-none mr-2">
                         <svg class="w-8 h-8" :class="darkMode ? 'text-gray-100' : 'text-gray-900'" fill="none" :stroke="darkMode ? '#f3f4f6' : '#1c1e21'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                             <line x1="3" y1="6" x2="21" y2="6"></line>
                             <line x1="3" y1="12" x2="21" y2="12"></line>
