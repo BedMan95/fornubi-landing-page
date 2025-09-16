@@ -8,6 +8,16 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
     <style>
+        /* Parallax background for HERO */
+        .parallax-bg {
+            position: absolute;
+            will-change: transform;
+            pointer-events: none;
+        }
+        body, html {
+            overflow: hidden !important;
+            height: 100vh;
+        }
         p {
             color: #222 !important;
         }
@@ -223,8 +233,8 @@
                 <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=700&q=80" alt="PC Service and App(Web, Dekstop & Android) Development" class="rounded-2xl shadow-2xl bounce w-full max-w-md glass" />
             </div>
         </div>
-        <div class="absolute top-0 left-0 w-72 h-72 bg-blue-100 dark:bg-blue-900 rounded-full opacity-30 blur-3xl -z-10" style="transform: translate(-40%,-40%)"></div>
-        <div class="absolute bottom-0 right-0 w-96 h-96 bg-cyan-200 dark:bg-blue-800 rounded-full opacity-20 blur-3xl -z-10" style="transform: translate(30%,30%)"></div>
+    <div id="parallax1" class="parallax-bg top-0 left-0 w-72 h-72 bg-blue-100 dark:bg-blue-900 rounded-full opacity-30 blur-3xl -z-10" style="transform: translate(-40%,-40%);"></div>
+    <div id="parallax2" class="parallax-bg bottom-0 right-0 w-96 h-96 bg-cyan-200 dark:bg-blue-800 rounded-full opacity-20 blur-3xl -z-10" style="transform: translate(30%,30%);"></div>
     </section>
 
     <!-- SERVICES -->
@@ -299,6 +309,16 @@
         </div>
     </footer>
     <script>
+        // Parallax effect for HERO background
+        function parallaxScroll() {
+            const y = window.scrollY;
+            const p1 = document.getElementById('parallax1');
+            const p2 = document.getElementById('parallax2');
+            if (p1) p1.style.transform = `translate(-40%,-40%) translateY(${y * 0.3}px)`;
+            if (p2) p2.style.transform = `translate(30%,30%) translateY(${y * -0.2}px)`;
+        }
+        window.addEventListener('scroll', parallaxScroll);
+        parallaxScroll();
         // Smooth scroll for anchor links
         document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
