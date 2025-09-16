@@ -8,6 +8,25 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
     <style>
+        /* Mobile menu icon position */
+        .menu-icon-abs {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: auto;
+            z-index: 40;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: right 0.3s, left 0.3s;
+        }
+        .menu-icon-center {
+            left: 50%;
+            right: auto;
+            transform: translateX(-50%);
+        }
         /* Ensure mobile menu text is visible in light mode */
         #mobile-menu {
             color: #1c1e21 !important;
@@ -186,8 +205,12 @@
             <h1 class="text-3xl font-extrabold tracking-tight brand-gradient">Fornubi</h1>
             <nav class="flex items-center space-x-4">
                 <div class="md:hidden">
-                        <div :class="['w-full', menuOpen ? 'flex justify-center' : 'flex justify-end']">
-                            <button @click="menuOpen = !menuOpen" aria-label="Toggle menu" class="focus:outline-none transition-all duration-300">
+                        <div class="relative w-full h-12">
+                            <button
+                                @click="menuOpen = !menuOpen"
+                                aria-label="Toggle menu"
+                                :class="['menu-icon-abs', menuOpen ? 'menu-icon-center' : '']"
+                            >
                                 <svg class="w-8 h-8" :class="darkMode ? 'text-gray-100' : 'text-gray-900'" fill="none" :stroke="darkMode ? '#f3f4f6' : '#1c1e21'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                                     <line x1="3" y1="6" x2="21" y2="6"></line>
                                     <line x1="3" y1="12" x2="21" y2="12"></line>
